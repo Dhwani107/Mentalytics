@@ -4,8 +4,6 @@ __pycache__/
 *.pyc
 .vscode/
 
-# Unwanted generated & model files
+# Unwanted generated config files
 .hintrc
 babel.json
-
-*.pkl
