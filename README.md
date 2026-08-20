@@ -1,6 +1,6 @@
 # 🧠 Mentalytics - Student Mental Health & Social Media Impact Predictor
 
-Mentalytics is an end-to-end Machine Learning web application designed to evaluate and predict a student's **Mental Health Score** based on daily digital habits, physical activity, sleep patterns, academic pressure, and demographic factors.
+Mentalytics is an end-to-end Machine Learning web application powered by **FastAPI** and **Scikit-Learn** designed to evaluate and predict a student's **Mental Health Score** based on daily digital habits, physical activity, sleep patterns, academic pressure, and demographic factors.
 
 ---
 
@@ -8,11 +8,22 @@ Mentalytics is an end-to-end Machine Learning web application designed to evalua
 
 | Domain | Technologies |
 | :--- | :--- |
+| **Backend API** | **FastAPI**, **Python 3.10+**, **Uvicorn** (ASGI Server), **Pydantic** (Data Validation & Schemas) |
 | **Frontend** | HTML5, Vanilla CSS3 (Modern Glassmorphic Dark UI), JavaScript (ES6+ Fetch API) |
-| **Backend API** | Python 3.10+, **FastAPI**, **Uvicorn** (ASGI Server), **Pydantic** (Data Validation & Schemas) |
 | **Machine Learning & Pipeline** | **Scikit-Learn** (`RandomForestRegressor`, `Pipeline`, `ColumnTransformer`, `StandardScaler`, `OneHotEncoder`, `OrdinalEncoder`), **Pandas**, **NumPy**, **Joblib** |
 | **Data Analysis & Training** | Jupyter Notebook (`ML_Project.ipynb`), Matplotlib, Seaborn |
 | **Deployment & Production** | `Procfile` (Uvicorn / Heroku / Render Ready) |
+
+---
+
+## ⚡ Why FastAPI for Backend Architecture?
+
+**FastAPI** was selected to serve the machine learning backend model (`main.py`) for key production reasons:
+
+1. **High Performance & Asynchronous Capability**: Built on top of Starlette and Pydantic, FastAPI is one of the fastest Python frameworks available, executing request validation and ML inferences with minimal latency.
+2. **Strict Request Validation via Pydantic**: Guarantees that incoming user input fields (e.g. `age`, `sleep_hours_per_night`, `avg_daily_usage_hours`) strictly comply with range limits and expected data types before hitting the ML pipeline model (`StudentData` schema).
+3. **Automatic Interactive API Documentation**: Automatically generates interactive Swagger UI (`/docs`) and ReDoc (`/redoc`) documentation endpoints out of the box.
+4. **CORS Middleware Support**: Configured with `CORSMiddleware` to allow smooth cross-origin requests between static frontend clients and the prediction server endpoint.
 
 ---
 
@@ -33,7 +44,7 @@ During model development, multiple algorithms (including Linear Regression and R
 The mental health score is a continuous numerical rating (0.0 to 10.0 scale) predicted through an automated scikit-learn `Pipeline`:
 
 ```
-Raw User Input ➡️ Pydantic Validation ➡️ ColumnTransformer Preprocessing ➡️ RandomForest Regressor ➡️ Predicted Score
+Raw User Input ➡️ FastAPI Pydantic Validation ➡️ ColumnTransformer Preprocessing ➡️ RandomForest Regressor ➡️ Predicted Score
 ```
 
 ### Preprocessing Pipeline Steps (`ColumnTransformer`):
@@ -75,7 +86,11 @@ Feature importance values extracted directly from the trained `RandomForestRegre
 
 ---
 
-## ⚡ API Endpoints & Request Schema
+## ⚡ FastAPI Endpoints & Request Schema
+
+FastAPI automatically serves interactive API documentation at:
+- **Swagger UI**: `http://localhost:8000/docs`
+- **ReDoc**: `http://localhost:8000/redoc`
 
 ### POST `/predict`
 Calculates the predicted mental health score for a given student profile.
@@ -138,12 +153,12 @@ Open your browser at `http://localhost:8000` to interact with the application.
 
 ```
 Mentalytics/
-├── main.py                                      # FastAPI application & API endpoints
+├── main.py                                      # FastAPI backend application & API endpoints
 ├── index.html                                   # Web user interface
 ├── style.css                                    # Glassmorphism styling rules
 ├── script.js                                    # Frontend API integration & UI logic
-├── requirements.txt                             # Python dependencies
-├── Procfile                                     # Production deployment configuration
+├── requirements.txt                             # Python dependencies (fastapi, uvicorn, pydantic, scikit-learn, etc.)
+├── Procfile                                     # Production deployment configuration (Uvicorn)
 ├── ML_Project.ipynb                             # EDA, model training & hyperparameter tuning
 ├── ML_Project.html                              # Exported notebook presentation
 ├── Student Social Media And Mental Health Impact.csv # Dataset used for training
