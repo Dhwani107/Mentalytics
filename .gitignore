@@ -3,3 +3,9 @@ venv/
 __pycache__/
 *.pyc
 .vscode/
+
+# Unwanted generated & model files
+.hintrc
+babel.json
+
+*.pkl
