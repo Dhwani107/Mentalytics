@@ -2,6 +2,7 @@
 
 Mentalytics is an end-to-end Machine Learning web application powered by **FastAPI** and **Scikit-Learn** designed to evaluate and predict a student's **Mental Health Score** based on daily digital habits, physical activity, sleep patterns, academic pressure, and demographic factors.
 
+Live Demo - https://mentalytics-sget.onrender.com/
 ---
 
 ## 🛠️ Technology Stack
